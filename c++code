@@ -1,0 +1,38 @@
+ public:
+    //Function to find the next greater element for each element of the array.
+    vector<long long> nextLargerElement(vector<long long> arr, int n){
+       vector<long long>an;
+       stack<long long>st;
+       
+       //if stack is empty push -1 in anwervector;
+       //if st.top()>arr[i]  then push st.top() in answer vector
+       //jabtak stack empty nahi hojata aur stack top element <arr[i] tabatak pop karo
+       //if stack is empty push -1 
+       //if stack is not empty push st.top();
+       //push arr[i] in stack  for next element;
+       
+       for(int i= n-1;i>=0;i--)
+       {
+           if(st.empty())
+           {
+               an.push_back(-1);
+               
+           }
+          else if(st.top()>arr[i])
+            an.push_back(st.top());
+            
+            else
+           {
+              while(!st.empty() && !( st.top()>arr[i])){///
+              st.pop();
+              }
+               if(st.empty())
+               an.push_back(-1);
+               else
+                an.push_back(st.top());
+           }
+           st.push(arr[i]);
+       }
+       reverse(an.begin(),an.end());
+       return an;
+    }
